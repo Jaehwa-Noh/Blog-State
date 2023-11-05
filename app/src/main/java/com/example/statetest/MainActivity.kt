@@ -14,6 +14,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -60,15 +64,18 @@ fun TextOutput(modifier: Modifier = Modifier) {
     Text(
         text = "Input: ",
         modifier = modifier
-
     )
 }
 
 @Composable
 fun TextInput(modifier: Modifier = Modifier) {
+    var inputText: String by remember {
+        mutableStateOf("Hi, 안녕.")
+    }
+
     TextField(
-        value = "",
-        onValueChange = { },
+        value = inputText,
+        onValueChange = { inputText = it },
         modifier = modifier
     )
 }
