@@ -51,31 +51,42 @@ fun TextInputAndTextOutput(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Start
     ) {
+        var inputText: String by remember {
+            mutableStateOf("Hi, 안녕.")
+        }
+
         TextInput(
+            inputText = inputText,
+            onValueChange = { inputText = it },
             Modifier
                 .fillMaxWidth()
         )
-        TextOutput()
+        TextOutput(
+            inputText = inputText
+        )
     }
 }
 
 @Composable
-fun TextOutput(modifier: Modifier = Modifier) {
+fun TextOutput(
+    inputText: String,
+    modifier: Modifier = Modifier
+) {
     Text(
-        text = "Input: ",
+        text = "Input: $inputText",
         modifier = modifier
     )
 }
 
 @Composable
-fun TextInput(modifier: Modifier = Modifier) {
-    var inputText: String by remember {
-        mutableStateOf("Hi, 안녕.")
-    }
-
+fun TextInput(
+    inputText: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     TextField(
         value = inputText,
-        onValueChange = { inputText = it },
+        onValueChange = onValueChange,
         modifier = modifier
     )
 }
